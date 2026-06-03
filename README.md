@@ -1,2 +1,3 @@
 # Array-and-Operations
 
+https://codeforces.com/problemset/problem/498/C
