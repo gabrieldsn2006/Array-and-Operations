@@ -19,6 +19,7 @@ python src/main.py < dados/entradas_do_problema.txt
 
 # No PowerShell (Windows):
 Get-Content dados\entradas_do_problema.txt | python src\main.py
+ou
 cat dados\entradas_do_problema.txt | python src\main.py
 ```
 
