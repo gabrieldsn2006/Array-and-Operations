@@ -4,7 +4,7 @@ https://codeforces.com/problemset/problem/498/C
 
 ---
 
-time limit per test: 1 second
+time limit per test: 1 second   
 memory limit per test: 256 megabytes
 
 You have written on a piece of paper an array of $n$ positive integers $a[1], a[2], ..., a[n]$ and $m$ good pairs of integers $(i_1, j_1), (i_2, j_2), ..., (i_m, j_m)$. Each good pair $(i_k, j_k)$ meets the following conditions: $i_k + j_k$ is an odd number and $1 ≤ i_k < j_k ≤ n$.
