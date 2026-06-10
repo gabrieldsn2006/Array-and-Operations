@@ -2,6 +2,8 @@
 
 **Link do Problema:** [https://codeforces.com/problemset/problem/498/C](https://codeforces.com/problemset/problem/498/C)
 
+**Link da Apresentação** [https://www.canva.com/design/DAHLhuOOSs4/fhZRprSqbRUKflnzzPK8Ag/view?utm_content=DAHLhuOOSs4&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha341ba3a8ab](https://www.canva.com/design/DAHLhuOOSs4/fhZRprSqbRUKflnzzPK8Ag/view?utm_content=DAHLhuOOSs4&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha341ba3a8ab)
+
 **Integrantes do Grupo:**
 - Victor Lins
 - Gabriel de Sousa
