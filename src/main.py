@@ -56,12 +56,12 @@ def solve():
 
     graph = [{} for _ in range(num_nodes)]
     
+
     def add_edge(u, v, cap):
         if v not in graph[u]:
             graph[u][v] = 0
             graph[v][u] = 0
         graph[u][v] += cap
-        
     # Source is 0, Sink is 1
     # Even indices connect from Source, Odd indices connect to Sink
     for i in range(1, n + 1):
