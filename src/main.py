@@ -44,7 +44,6 @@ def solve():
             d += 2
         if x > 1:
             factors_list[i][x] = 1
-
     # Map each (index, prime) to a unique node ID
     node_id = 2
     node_map = {}
@@ -52,8 +51,9 @@ def solve():
         for p in factors_list[i]:
             node_map[(i, p)] = node_id
             node_id += 1
-            
     num_nodes = node_id
+
+
     graph = [{} for _ in range(num_nodes)]
     
     def add_edge(u, v, cap):
@@ -84,8 +84,6 @@ def solve():
             node_v = node_map[(v, p)]
             add_edge(node_u, node_v, INF)
 
-    graph = [{} for _ in range(num_nodes)]     
-    
     def bfs():
         parent = [-1] * num_nodes
         parent[0] = -2
