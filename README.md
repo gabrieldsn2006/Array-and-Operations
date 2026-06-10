@@ -40,7 +40,7 @@ A solução foi modelada como um problema de fluxo máximo em um grafo bipartido
 ## Algoritmo Utilizado
 
 
-Foi utilizado o algoritmo de **Edmonds-Karp** para encontrar o fluxo máximo. Essa abordagem foi preferida no lugar do Ford-Fulkerson com DFS para garantir a localização do caminho aumentante mais curto a cada iteração (usando BFS). Isso nos livra de casos degenerados de pior cenário e deixa o tempo de execução previsível, prevenindo o risco de *Time Limit Exceeded* (TLE).
+Foi utilizado o algoritmo de **Edmonds-Karp** para encontrar o fluxo máximo. Essa abordagem foi preferida no lugar do Ford-Fulkerson com DFS para garantir a localização do caminho aumentante com o menor número de arestas a cada iteração (usando BFS). Para a implementação eficiente desta busca em largura, utilizamos a estrutura de fila `deque` (Double-Ended Queue) nativa da biblioteca `collections` do Python, que garante operações de inserção e remoção em $O(1)$. Isso nos livra de casos degenerados de pior cenário e deixa o tempo de execução previsível, prevenindo o risco de *Time Limit Exceeded* (TLE).
 
 ### O Papel do Grafo Residual
 
@@ -54,11 +54,21 @@ O valor direto do fluxo máximo capacitado que atinge o Sorvedouro equivale exat
 
 ## Análise de Complexidade
 
-> *[PLACEHOLDER: Descrever a complexidade do algoritmo para o Edmonds-Karp, como ele se traduz com V e E neste problema de fatores primos e citar qual a estrutura mais ocupou memória (dicionários do grafo/capacidades).]*
+A complexidade de tempo total da solução é dominada por duas etapas principais: a fatoração dos números e o cálculo do fluxo máximo em si.
+
+1. **Fase de Fatoração:** Para cada um dos $n$ números da entrada, a busca por fatores primos itera no máximo até a raiz quadrada do número. O custo total desta fase é $O(n \sqrt{\max(a_i)})$.
+2. **Fase de Fluxo Máximo (Edmonds-Karp):** A complexidade teórica é $O(V \cdot E^2)$. Analisando os parâmetros da rede neste problema:
+   - O número máximo de vértices ($V$) corresponde à Origem, ao Sorvedouro e aos nós criados para os fatores primos. Como um número $a[i] \le 10^9$ possui no máximo 10 fatores primos distintos, teremos, no pior caso, em torno de $10 \cdot n + 2$ vértices. Com $n \le 100$, $V \approx 1000$.
+   - O número de arestas ($E$) é derivado das ligações entre $S$ e os índices pares, as ligações dos índices ímpares para $T$, e as conexões geradas pelos fatores primos compartilhados nos $m$ pares da entrada ($m \le 100$). A rede é muito pouco densa.
+
+Como o número de vértices e arestas gerados é muito pequeno, a complexidade temporal real roda bem abaixo do tempo limite de 1 segundo imposto pelo Codeforces. Em relação ao consumo de memória (complexidade espacial de $O(V + E)$), a estrutura dominante é a lista de dicionários (`graph = [{} for _ in range(num_nodes)]`) que armazenou as capacidades das arestas e do grafo residual. Usar dicionários no lugar de uma matriz de adjacência (que exigiria $O(V^2)$, ex: 1000x1000) foi a melhor decisão para economizar memória, dada a esparsidade do grafo.
 
 ## Casos Especiais Relevantes
 
-> *[PLACEHOLDER: Discutir casos em que não há pares válidos formando conexões, cenários com max_flow == 0 na primeira rodada e o cuidado para evitar estouro numérico nas capacidades da aresta infinita (10**15).]*
+Durante a implementação e modelagem, os seguintes cenários exigiram atenção:
+- **Pares inválidos ou sem divisores comuns:** Caso o problema informe conexões válidas, mas os números pareados não compartilhem nenhum fator primo, a nossa implementação filtra as conexões cruzando as chaves através de intersecções (`set.intersection`). Assim, arestas irrelevantes nem chegam a ser criadas. A busca rodará uma única vez sem encontrar $T$, o fluxo máximo permanecerá `0` na primeira rodada e o programa será encerrado rapidamente.
+- **Capacidades Infinitas e Estouro Numérico:** As arestas intermediárias recebem capacidade `10**15` para sinalizar uma "passagem livre" de fluxo, garantindo que o gargalo real venha dos limites estabelecidos por $S$ e $T$. Como escolhemos trabalhar em Python, que gerencia inteiros com precisão arbitrária, evitamos completamente a preocupação de um "estouro numérico" (*overflow*), um erro bem comum ao adotar esse modelo em linguagens de tipagem estática (como C++ e Java) onde se esqueceria de usar variáveis `long`.
+- **Otimização para Primos Grandes:** Na fatoração, em vez de testar divisões até $10^9$, o código itera apenas até a raiz quadrada do número ($\sqrt{a[i]}$). Se ao final restar um valor superior a 1, sabemos que ele é um primo. Isso lidou elegantemente com um potencial cenário de limite de tempo estourado (*TLE*) se o array contivesse números primos enormes.
 
 ## Comprovação de Accepted
 
