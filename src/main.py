@@ -75,11 +75,15 @@ def solve():
     INF = 10**15
 
     for u, v in pairs:
-        
+
         if u % 2 != 0:
             u, v = v, u 
         
-        common_primes = set(factors_list[u].keys()).intersection(set(factors_list[v].keys()))
+        common_primes = set(
+            factors_list[u].keys()
+            ).intersection(
+                set(factors_list[v].keys())
+                )
         for p in common_primes:
             node_u = node_map[(u, p)]
             node_v = node_map[(v, p)]
