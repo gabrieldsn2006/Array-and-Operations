@@ -63,6 +63,8 @@ A complexidade de tempo total da solução é dominada por duas etapas principai
    - O número máximo de vértices ($V$) corresponde à Origem, ao Sorvedouro e aos nós criados para os fatores primos. Como um número $a[i] \le 10^9$ possui no máximo 10 fatores primos distintos, teremos, no pior caso, em torno de $10 \cdot n + 2$ vértices. Com $n \le 100$, $V \approx 1000$.
    - O número de arestas ($E$) é derivado das ligações entre $S$ e os índices pares, as ligações dos índices ímpares para $T$, e as conexões geradas pelos fatores primos compartilhados nos $m$ pares da entrada ($m \le 100$). A rede é muito pouco densa.
 
+Big O total = $O(n \sqrt{\max(a_i)} + V \cdot E^2)$
+
 Como o número de vértices e arestas gerados é muito pequeno, a complexidade temporal real roda bem abaixo do tempo limite de 1 segundo imposto pelo Codeforces. Em relação ao consumo de memória (complexidade espacial de $O(V + E)$), a estrutura dominante é a lista de dicionários (`graph = [{} for _ in range(num_nodes)]`) que armazenou as capacidades das arestas e do grafo residual. Usar dicionários no lugar de uma matriz de adjacência (que exigiria $O(V^2)$, ex: 1000x1000) foi a melhor decisão para economizar memória, dada a esparsidade do grafo.
 
 ## Casos Especiais Relevantes
