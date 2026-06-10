@@ -83,8 +83,9 @@ def solve():
             node_u = node_map[(u, p)]
             node_v = node_map[(v, p)]
             add_edge(node_u, node_v, INF)
-            
-    # Edmonds-Karp using BFS to find augmenting paths
+
+    graph = [{} for _ in range(num_nodes)]     
+    
     def bfs():
         parent = [-1] * num_nodes
         parent[0] = -2
