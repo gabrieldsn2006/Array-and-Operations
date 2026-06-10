@@ -73,6 +73,7 @@ def solve():
                 add_edge(u, 1, count)
                 
     INF = 10**15
+    
     for u, v in pairs:
         # Ensure u is the even index, v is the odd index
         if u % 2 != 0:
